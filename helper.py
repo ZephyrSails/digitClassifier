@@ -1,3 +1,5 @@
+import numpy as np
+
 def preprocess(images):
     #this function is suggested to help build your classifier.
     #You might want to do something with the images before
