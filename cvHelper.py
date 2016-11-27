@@ -6,6 +6,7 @@ import random
 import sys
 import classifier_1
 import classifier_2
+import os
 
 
 def cv(k, method, directory='.'):
@@ -75,11 +76,20 @@ def preprocess(images):
     return [i.flatten() for i in images]
 
 def outputImage(predicted, expected, testing_images):
-    # create 10 file
+    # create 10 folders
+
+    for i in range(10):
+        directory = str(i)
+    
+        if not os.path.exists(directory):
+            os.mkdir(directory)
+
     # if a image has other labels but is misclassified as '1', then put the image into file '1'
     for i, label in enumerate(expected):
         if label != predicted[i]:
-            # put the relevent image into file 'label'
+            # put the relevent image into folder 'predicted[i]'
+            plt.imsave(str(label) + '.png', testing_images[i], cmap = 'gray')
+
 
 if __name__ == '__main__':
     cv(10, int(sys.argv[1]), '.')
