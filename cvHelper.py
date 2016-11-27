@@ -74,6 +74,12 @@ def preprocess(images):
     #handing them to the classifier. Right now it does nothing.
     return [i.flatten() for i in images]
 
+def outputImage(predicted, expected, testing_images):
+    # create 10 file
+    # if a image has other labels but is misclassified as '1', then put the image into file '1'
+    for i, label in enumerate(expected):
+        if label != predicted[i]:
+            # put the relevent image into file 'label'
 
 if __name__ == '__main__':
     cv(10, int(sys.argv[1]), '.')
