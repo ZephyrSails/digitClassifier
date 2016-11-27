@@ -18,6 +18,8 @@ def cv(k, method, directory='.'):
 
     images = preprocess(images)
     groupedPairs = cvDivide(images, labels, k)
+    erros_1 = []
+    erros_2 = []
 
     for i in xrange(k):
         # trainingImages = np.concatenate(groupedImges[:i], groupedImges[:i]
@@ -36,13 +38,11 @@ def cv(k, method, directory='.'):
 
         print np.shape(testingImages), np.shape(testingLabels), np.shape(trainingImages), np.shape(trainingLabels)
         if method == 0:
-            classifier_1.test(trainingImages, trainingLabels, testingImages, testingLabels)
+            erros_1.append(classifier_1.test(trainingImages, trainingLabels, testingImages, testingLabels))
         elif method == 1:
-            classifier_2.test(trainingImages, trainingLabels, testingImages, testingLabels)
+            erros_2.append(classifier_2.test(trainingImages, trainingLabels, testingImages, testingLabels))
 
-
-        # print np.shape(testingImages), np.shape(testingLabels), np.shape(trainingImages), np.shape(trainingLabels)
-
+    print erros_1, erros_2
 
 def cvDivide(datas, labels, k):
     """

@@ -85,6 +85,7 @@ def cmpParams(X, y):
     fig.savefig('hotColormap')
     plt.show()
 
+
 if __name__ == "__main__":
 
     # Code for loading data
