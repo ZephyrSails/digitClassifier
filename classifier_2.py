@@ -3,8 +3,8 @@ import sklearn
 from sklearn import svm # this is an example of using SVM
 
 def preprocess(images):
-    #this function is suggested to help build your classifier. 
-    #You might want to do something with the images before 
+    #this function is suggested to help build your classifier.
+    #You might want to do something with the images before
     #handing them to the classifier. Right now it does nothing.
     return [i.flatten() for i in images]
 
@@ -27,7 +27,7 @@ def save_classifier(classifier, training_set, training_labels):
 
 
 def classify(images, classifier):
-    #runs the classifier on a set of images. 
+    #runs the classifier on a set of images.
     return classifier.predict(images)
 
 def error_measure(predicted, actual):
@@ -36,10 +36,10 @@ def error_measure(predicted, actual):
 if __name__ == "__main__":
 
     # Code for loading data
-    
+
     # preprocessing
     images = preprocess(images)
-    
+
     # pick training and testing set
     # YOU HAVE TO CHANGE THIS TO PICK DIFFERENT SET OF DATA
     training_set = images[0:1000]

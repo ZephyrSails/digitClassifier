@@ -5,6 +5,7 @@ import itertools
 import random
 import sys
 import classifier_1
+import classifier_2
 
 
 def cv(k, method, directory='.'):
@@ -36,6 +37,9 @@ def cv(k, method, directory='.'):
         print np.shape(testingImages), np.shape(testingLabels), np.shape(trainingImages), np.shape(trainingLabels)
         if method == 0:
             classifier_1.test(trainingImages, trainingLabels, testingImages, testingLabels)
+        elif method == 1:
+            classifier_2.test(trainingImages, trainingLabels, testingImages, testingLabels)
+
 
         # print np.shape(testingImages), np.shape(testingLabels), np.shape(trainingImages), np.shape(trainingLabels)
 
