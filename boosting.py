@@ -41,7 +41,7 @@ def boosting_A(training_set, training_labels, testing_set, testing_labels):
 	error = error_measure(predicted_labels, testing_labels)
 	print 'error rate %f' % error
 
-	return predicted_labels, confusion_matrix
+	return predicted_labels, confusion_matrix, error
 
 def boosting_B(training_set, training_labels, testing_set, testing_labels):
 	'''
@@ -68,7 +68,7 @@ def boosting_B(training_set, training_labels, testing_set, testing_labels):
 	error = error_measure(predicted_labels, testing_labels)
 	print 'error rate %f' % error
 
-	return predicted_labels, confusion_matrix
+	return predicted_labels, confusion_matrix, error
 
 def main():
 	"""
@@ -81,14 +81,21 @@ def main():
 
 	# pick training and testing set
 	# YOU HAVE TO CHANGE THIS TO PICK DIFFERENT SET OF DATA
-	training_set = images[:1000]
-	training_labels = labels[:1000]
-	testing_set = images[-100:]
-	testing_labels = labels[-100:]
+	erros_1 = []
+	erros_2 = []
 
-	predicted_labels, confusion_matrix = boosting_A(training_set, training_labels, testing_set, testing_labels)
-	predicted_labels, confusion_matrix = boosting_B(training_set, training_labels, testing_set, testing_labels)
+	for i in xrange(0, 10000, 1000):
+		training_set = images[i:i+1000]
+		training_labels = labels[i:i+1000]
+		testing_set = images[-i-100:-i]
+		testing_labels = labels[-i-100:-i]
 
+		predicted_labels, confusion_matrix, error = boosting_A(training_set, training_labels, testing_set, testing_labels)
+		erros_1.append(error)
+		predicted_labels, confusion_matrix, error = boosting_B(training_set, training_labels, testing_set, testing_labels)
+		erros_2.append(error)
+
+	print erros_1, erros_2
 
 
 if __name__ == '__main__':
