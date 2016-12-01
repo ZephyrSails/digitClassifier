@@ -7,6 +7,7 @@ from mnist import load_mnist
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import GridSearchCV
+from cvHelper import *
 from helper import *
 
 def build_classifier(images, labels, _k = 3):
@@ -23,24 +24,6 @@ def classify(images, classifier):
     clsres = classifier.predict(images)
     return clsres
 
-
-def test(training_set, training_labels, testing_set, testing_labels):
-    classifier = build_classifier(training_set, training_labels)
-    save_classifier(classifier, training_set, training_labels)
-    # classifier = pickle.load(open('classifier_1.p'))
-    predicted = classify(testing_set, classifier)
-
-    print("Classification report for classifier %s:\n%s\n"
-      % (classifier, metrics.classification_report(testing_labels, predicted)))
-    print("Confusion matrix:\n%s" % metrics.confusion_matrix(testing_labels, predicted))
-
-    # for i, item in enumerate(testing_labels):
-    #     print predicted[i], '\t', testing_labels[i]
-
-    error = error_measure(predicted, testing_labels)
-    print 'error rate %f' % error
-    return error
-
 def test(training_set, training_labels, testing_set, testing_labels, _k = 3):
     classifier = build_classifier(training_set, training_labels, _k)
     save_classifier(classifier, training_set, training_labels)
@@ -56,7 +39,7 @@ def test(training_set, training_labels, testing_set, testing_labels, _k = 3):
 
     error = error_measure(predicted, testing_labels)
     print 'error rate %f' % error
-    return error
+    return error, predicted
 
 def cmpParams(X, y):
 
@@ -77,19 +60,21 @@ def cmpParams(X, y):
 if __name__ == "__main__":
 
     # Code for loading data
-    images, labels = load_mnist(digits=range(0, 10), path='.')
+    raw_images, labels = load_mnist(digits=range(0, 10), path='.')
     # preprocessing
-    images = preprocess(images)
+    images = preprocess(raw_images)
 
-    print type(images[1]), len(images[1]), '\n', images[1]
+ #   print type(images[1]), len(images[1]), '\n', images[1]
 
     # pick training and testing set
     # YOU HAVE TO CHANGE THIS TO PICK DIFFERENT SET OF DATA
     training_set = images[0:6000]
     training_labels = labels[0:6000]
-    # testing_set = images[-100:]
-    # testing_labels = labels[-100:]
+    testing_set = images[-1000:]
+    testing_labels = labels[-1000:]
+    testing_raw_images = raw_images[-1000:]
 #    cmpParams(training_set, training_labels)
 
-    # test(training_set, training_labels, testing_set, testing_labels)
+    [error, predicted] = test(training_set, training_labels, testing_set, testing_labels)
+    outputImage(predicted, testing_labels, testing_raw_images)
     #build_classifier is a function that takes in training data and outputs an sklearn classifier.

@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+import os
 
 def preprocess(images):
     #this function is suggested to help build your classifier.
@@ -19,3 +21,20 @@ def save_classifier(classifier, training_set, training_labels):
     pickle.dump(classifier, open('classifier_1.p', 'w'))
     pickle.dump(training_set, open('training_set.p', 'w'))
     pickle.dump(training_labels, open('training_labels.p', 'w'))
+
+def outputImage(predicted, expected, testing_images):
+
+    # create 10 folders
+    for i in range(10):
+        # directory = os.path.join('misclassified', str(i))
+        directory = str(i)
+        if not os.path.exists(directory):
+            os.mkdir(directory)
+
+    # if a image has other labels but is misclassified as '1', then put the image into file '1'
+    for i, label in enumerate(expected):
+        if label != predicted[i]:
+            # put the relevent image into folder 'predicted[i]'
+            # pathName = os.path.join('misclassified', str(predicted[i]), 'label_' + str(label) + '_' + str(i) + '.png')
+            pathName = os.path.join(str(predicted[i]), 'label_' + str(label) + '_' + str(i) + '.png')
+            plt.imsave(pathName, testing_images[i], cmap = 'gray')

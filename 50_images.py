@@ -14,10 +14,10 @@ print len(images[1])
 # plt.title('Handwritten image of the digit ' + str(labels[i]))
 # plt.show()
 
-# idx = np.random.randint(1, len(images) - 1, size=50)
-# for count, i in enumerate(idx): ## will open an empty extra figure :(
-#     print i
-#     plt.imsave('image' + str(count) + 'png', images[i], cmap = 'gray')
+idx = np.random.randint(1, len(images) - 1, size=5)
+for count, i in enumerate(idx): ## will open an empty extra figure :(
+    print i
+    plt.imsave('image' + str(count) + 'png', images[i], cmap = 'gray')
 
 for i in range(1, 10):
 	images, labels = load_mnist(digits=[i], path='.')
