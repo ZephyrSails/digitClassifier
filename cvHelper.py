@@ -88,7 +88,7 @@ def outputImage(predicted, expected, testing_images):
     for i, label in enumerate(expected):
         if label != predicted[i]:
             # put the relevent image into folder 'predicted[i]'
-            plt.imsave(str(label) + '.png', testing_images[i], cmap = 'gray')
+            plt.imsave(str(label) + str(i) + '.png', testing_images[i], cmap = 'gray')
 
 
 if __name__ == '__main__':

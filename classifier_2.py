@@ -81,13 +81,15 @@ if __name__ == "__main__":
     # preprocessing
     images = preprocess(images)
 
+    print type(images[1]), len(images[1]), '\n', images[1]
+
     # pick training and testing set
     # YOU HAVE TO CHANGE THIS TO PICK DIFFERENT SET OF DATA
     training_set = images[0:6000]
     training_labels = labels[0:6000]
     # testing_set = images[-100:]
     # testing_labels = labels[-100:]
-    cmpParams(training_set, training_labels)
+#    cmpParams(training_set, training_labels)
 
     # test(training_set, training_labels, testing_set, testing_labels)
     #build_classifier is a function that takes in training data and outputs an sklearn classifier.
