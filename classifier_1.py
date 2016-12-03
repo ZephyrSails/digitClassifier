@@ -95,11 +95,14 @@ if __name__ == "__main__":
 
     # pick training and testing set
     # YOU HAVE TO CHANGE THIS TO PICK DIFFERENT SET OF DATA
-    training_set = images[:6000]
-    training_labels = labels[:6000]
+    training_set = images[:]
+    training_labels = labels[:]
     # testing_set = images[-100:]
     # testing_labels = labels[-100:]
-    cmpParams(training_set, training_labels)
+    # cmpParams(training_set, training_labels)
+
+    classifier = build_classifier(training_set, training_labels, _gamma=0.01, _C=100.0)
+    save_classifier(classifier, training_set, training_labels)
 
     # test(training_set, training_labels, testing_set, testing_labels)
     #build_classifier is a function that takes in training data and outputs an sklearn classifier.
